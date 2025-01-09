@@ -1,5 +1,5 @@
+const OPENAI_API_KEY = "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"; // 🔴 Replace this with your actual API key
 let drillActive = false;
-let drillIncident = "";
 function searchIncident() {
    let input = document.getElementById("searchBox").value.toLowerCase();
    let pages = {
@@ -22,7 +22,7 @@ function toggleChat() {
    let chat = document.getElementById("chatbot");
    chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";
 }
-function sendMessage() {
+async function sendMessage() {
    let input = document.getElementById("chatInput").value.toLowerCase();
    let messages = document.getElementById("chatbotMessages");
    if (!input.trim()) return;
@@ -31,37 +31,60 @@ function sendMessage() {
    userMessage.textContent = input;
    messages.appendChild(userMessage);
    document.getElementById("typingIndicator").style.display = "block";
-   setTimeout(() => {
-       let botMessage = document.createElement("p");
-       botMessage.classList.add("bot-message");
-       let responses = {
-           "mva": "📍 Location? 🚗 How many vehicles? 🚑 Any injuries?",
-           "theft": "📍 Location? 🏠 What was stolen? ⏳ When did it happen? 👀 Any suspects?",
-           "complaint": "📍 Location? 🔍 What is the complaint? ⏳ How long has it been happening?",
-           "electrical fire": "📍 Location? 🔥 What is burning? 🚒 Is the fire spreading?",
-           "major fire": "📍 Location? 🏢 What building is on fire? 🚑 Any injuries?",
-           "minor fire": "📍 Location? 🔥 Is the fire contained? 🌫️ Any smoke inhalation?",
-           "fainting": "📍 Location? 👤 Is the person breathing? 🏥 Any medical history?",
-           "abdominal pain": "📍 Location? ⚕️ How severe is the pain? 🍽️ Any recent food allergies?"
-       };
-       if (input === "start drill") {
-           drillActive = true;
-           let incidentKeys = Object.keys(responses);
-           drillIncident = incidentKeys[Math.floor(Math.random() * incidentKeys)]; // Select random incident
-           botMessage.textContent = `🚨 DRILL MODE ACTIVATED 🚨 \nSimulating a ${drillIncident.replace("-", " ")}. Begin questioning!`;
-       } else if (drillActive) {
-           botMessage.textContent = responses[drillIncident] || "Continue questioning for the drill.";
-       } else {
-           botMessage.textContent = responses[input] || "I don't have a response for that. Try another incident.";
-       }
-       messages.appendChild(botMessage);
-       document.getElementById("typingIndicator").style.display = "none";
-       document.getElementById("chatInput").value = "";
-       messages.scrollTop = messages.scrollHeight;
-   }, 2000);
+   if (input === "start drill") {
+       drillActive = true;
+       await generateDrillScenario();
+   } else {
+       await getChatGPTResponse(input);
+   }
+   document.getElementById("typingIndicator").style.display = "none";
+   document.getElementById("chatInput").value = "";
+   messages.scrollTop = messages.scrollHeight;
+}
+async function generateDrillScenario() {
+   let messages = document.getElementById("chatbotMessages");
+   let botMessage = document.createElement("p");
+   botMessage.classList.add("bot-message");
+   botMessage.textContent = "🚨 Generating a real-time emergency drill scenario... 🚨";
+   messages.appendChild(botMessage);
+   let prompt = `Generate a realistic 911 emergency drill for a dispatcher. The drill should include a fake emergency, a description of the caller, location details, and key questions the dispatcher should ask. Keep it as realistic as possible.`;
+   let scenario = await callChatGPT(prompt);
+   let responseMessage = document.createElement("p");
+   responseMessage.classList.add("bot-message");
+   responseMessage.textContent = scenario;
+   messages.appendChild(responseMessage);
+}
+async function getChatGPTResponse(userInput) {
+   let messages = document.getElementById("chatbotMessages");
+   let prompt = `You are a 911 dispatcher assistant. The user has asked: "${userInput}". Provide a professional dispatcher response.`;
+   let aiResponse = await callChatGPT(prompt);
+   let botMessage = document.createElement("p");
+   botMessage.classList.add("bot-message");
+   botMessage.textContent = aiResponse;
+   messages.appendChild(botMessage);
+}
+async function callChatGPT(prompt) {
+   try {
+       let response = await fetch("https://api.openai.com/v1/chat/completions", {
+           method: "POST",
+           headers: {
+               "Content-Type": "application/json",
+               "Authorization": `Bearer ${OPENAI_API_KEY}`
+           },
+           body: JSON.stringify({
+               model: "gpt-3.5-turbo",
+               messages: [{ role: "system", content: prompt }],
+               max_tokens: 150
+           })
+       });
+       let data = await response.json();
+       return data.choices[0].message.content.trim();
+   } catch (error) {
+       console.error("Error fetching ChatGPT response:", error);
+       return "⚠️ Error connecting to AI. Please try again.";
+   }
 }
 function clearChat() {
    document.getElementById("chatbotMessages").innerHTML = "<p class='bot-message'>Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>";
    drillActive = false;
-   drillIncident = "";
 }
