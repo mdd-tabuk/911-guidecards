@@ -22,7 +22,7 @@ body {
     bottom: 20px;
     right: 20px;
     cursor: pointer;
-    z-index: 1000; /* Ensures it's above other elements */
+    z-index: 1000;
     animation: floatAnimation 2s infinite alternate ease-in-out;
 }
 
@@ -51,7 +51,7 @@ body {
     100% { transform: translateY(-5px); }
 }
 
-/* Chatbot Box */
+/* Chatbot Box (Opens from Left) */
 .chatbot-box {
     display: none;
     width: 350px;
@@ -60,14 +60,14 @@ body {
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     position: fixed;
-    bottom: 90px; /* Moves the chat box ABOVE the button */
-    right: 20px;
+    bottom: 20px;
+    right: 100px; /* Opens from the LEFT of the chat button */
     padding: 15px;
     text-align: left;
     transform: scale(0.8);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
-    z-index: 999; /* Ensure chatbot window does not cover the button */
+    z-index: 999;
 }
 
 /* Chatbot Open Effect */
