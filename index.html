@@ -5,6 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>911 Dispatcher Guide</title>
 <link rel="stylesheet" href="styles.css">
+<script>
+       function searchIncident() {
+           let input = document.getElementById("searchBox").value.toLowerCase();
+           let pages = {
+               "mva": "security.html",
+               "theft": "security.html",
+               "complaint": "security.html",
+               "electrical fire": "fire.html",
+               "major fire": "fire.html",
+               "minor fire": "fire.html",
+               "fainting": "medical.html",
+               "abdominal pain": "medical.html"
+           };
+           if (pages[input]) {
+               window.location.href = pages[input];
+           } else {
+               alert("Incident not found! Please try again.");
+           }
+       }
+</script>
 </head>
 <body>
 <div class="header">911 Dispatcher Guide</div>
@@ -13,6 +33,10 @@
 <a href="security.html" class="btn security">Security</a>
 <a href="medical.html" class="btn medical">Medical</a>
 <a href="fire.html" class="btn fire">Fire</a>
+<div class="search-box">
+<input type="text" id="searchBox" placeholder="Search for an incident (e.g. Fainting)">
+<button onclick="searchIncident()">Search</button>
+</div>
 </div>
 </body>
 </html>
