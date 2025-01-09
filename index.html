@@ -5,6 +5,35 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>911 Dispatcher Guide</title>
 <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="header">911 Dispatcher Guide</div>
+<div class="container">
+<h2>Select an Emergency Type</h2>
+<a href="security.html" class="btn security">Security</a>
+<a href="medical.html" class="btn medical">Medical</a>
+<a href="fire.html" class="btn fire">Fire</a>
+<div class="search-box">
+<input type="text" id="searchBox" placeholder="Search for an incident (e.g. Fainting)">
+<button onclick="searchIncident()">Search</button>
+</div>
+</div>
+<!-- Floating Chatbot -->
+<div class="chatbot-container">
+<button class="chatbot-toggle" onclick="toggleChat()">💬 Chat with Amaala</button>
+<div class="chatbot-box" id="chatbot">
+<div class="chatbot-header">
+               Amaala - Dispatcher Assistant
+<button class="close-chat" onclick="toggleChat()">✖</button>
+</div>
+<div class="chatbot-messages" id="chatbotMessages">
+<p class="bot-message">Hello! I'm Amaala. Ask me what to say in an emergency!</p>
+</div>
+<input type="text" id="chatInput" placeholder="Type an incident (e.g. MVA)">
+<button onclick="sendMessage()">Send</button>
+<button class="clear-chat" onclick="clearChat()">Clear Chat</button>
+</div>
+</div>
 <script>
        function searchIncident() {
            let input = document.getElementById("searchBox").value.toLowerCase();
@@ -24,68 +53,38 @@
                alert("Incident not found! Please try again.");
            }
        }
-</script>
-</head>
-
-    <!-- Chatbot Code -->
-<div class="chatbot-container">
-<button class="chatbot-toggle" onclick="toggleChat()">💬 Chat with Amaala</button>
-<div class="chatbot-box" id="chatbot">
-<div class="chatbot-header">Amaala - Dispatcher Assistant</div>
-<div class="chatbot-messages" id="chatbotMessages">
-<p class="bot-message">Hello! I'm Amaala. Ask me what to say in an emergency!</p>
-</div>
-<input type="text" id="chatInput" placeholder="Type an incident (e.g. MVA)">
-<button onclick="sendMessage()">Send</button>
-</div>
-</div>
-<script>
-   function toggleChat() {
-       let chat = document.getElementById("chatbot");
-       chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";
-   }
-   function sendMessage() {
-       let input = document.getElementById("chatInput").value.toLowerCase();
-       let messages = document.getElementById("chatbotMessages");
-       let userMessage = document.createElement("p");
-       userMessage.classList.add("user-message");
-       userMessage.textContent = input;
-       messages.appendChild(userMessage);
-       let botMessage = document.createElement("p");
-       botMessage.classList.add("bot-message");
-       let responses = {
-           "mva": "Ask: 1️⃣ What is the exact location? 2️⃣ How many vehicles are involved? 3️⃣ Are there any injuries?",
-           "theft": "Ask: 1️⃣ What was stolen? 2️⃣ When did it happen? 3️⃣ Do you see any suspects?",
-           "complaint": "Ask: 1️⃣ What is the complaint? 2️⃣ How long has it been happening? 3️⃣ Has anyone been harmed?",
-           "electrical fire": "Ask: 1️⃣ What is burning? 2️⃣ Is the fire spreading? 3️⃣ Are there people in danger?",
-           "major fire": "Ask: 1️⃣ What building is on fire? 2️⃣ Are there injuries? 3️⃣ Are fire exits blocked?",
-           "minor fire": "Ask: 1️⃣ What is burning? 2️⃣ Is the fire contained? 3️⃣ Is there smoke inhalation?",
-           "fainting": "Ask: 1️⃣ Is the person breathing? 2️⃣ Are they responsive? 3️⃣ Do they have a medical history?",
-           "abdominal pain": "Ask: 1️⃣ How severe is the pain? 2️⃣ How long have they had it? 3️⃣ Any recent food or allergies?"
-       };
-       if (responses[input]) {
-           botMessage.textContent = responses[input];
-       } else {
-           botMessage.textContent = "I don't have a response for that. Try another incident.";
+       function toggleChat() {
+           let chat = document.getElementById("chatbot");
+           chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";
        }
-       messages.appendChild(botMessage);
-       document.getElementById("chatInput").value = "";
-       messages.scrollTop = messages.scrollHeight;
-   }
+       function sendMessage() {
+           let input = document.getElementById("chatInput").value.toLowerCase();
+           let messages = document.getElementById("chatbotMessages");
+           if (!input.trim()) return;
+           let userMessage = document.createElement("p");
+           userMessage.classList.add("user-message");
+           userMessage.textContent = input;
+           messages.appendChild(userMessage);
+           let botMessage = document.createElement("p");
+           botMessage.classList.add("bot-message");
+           let responses = {
+               "mva": "Ask: 1️⃣ What is the exact location? 2️⃣ How many vehicles are involved? 3️⃣ Are there any injuries?",
+               "theft": "Ask: 1️⃣ What was stolen? 2️⃣ When did it happen? 3️⃣ Do you see any suspects?",
+               "complaint": "Ask: 1️⃣ What is the complaint? 2️⃣ How long has it been happening? 3️⃣ Has anyone been harmed?",
+               "electrical fire": "Ask: 1️⃣ What is burning? 2️⃣ Is the fire spreading? 3️⃣ Are there people in danger?",
+               "major fire": "Ask: 1️⃣ What building is on fire? 2️⃣ Are there injuries? 3️⃣ Are fire exits blocked?",
+               "minor fire": "Ask: 1️⃣ What is burning? 2️⃣ Is the fire contained? 3️⃣ Is there smoke inhalation?",
+               "fainting": "Ask: 1️⃣ Is the person breathing? 2️⃣ Are they responsive? 3️⃣ Do they have a medical history?",
+               "abdominal pain": "Ask: 1️⃣ How severe is the pain? 2️⃣ How long have they had it? 3️⃣ Any recent food or allergies?"
+           };
+           botMessage.textContent = responses[input] || "I don't have a response for that. Try another incident.";
+           messages.appendChild(botMessage);
+           document.getElementById("chatInput").value = "";
+           messages.scrollTop = messages.scrollHeight;
+       }
+       function clearChat() {
+           document.getElementById("chatbotMessages").innerHTML = "<p class='bot-message'>Hello! I'm Amaala. Ask me what to say in an emergency!</p>";
+       }
 </script>
-</body>
-</html>   
-<body>
-<div class="header">911 Dispatcher Guide</div>
-<div class="container">
-<h2>Select an Emergency Type</h2>
-<a href="security.html" class="btn security">Security</a>
-<a href="medical.html" class="btn medical">Medical</a>
-<a href="fire.html" class="btn fire">Fire</a>
-<div class="search-box">
-<input type="text" id="searchBox" placeholder="Search for an incident (e.g. Fainting)">
-<button onclick="searchIncident()">Search</button>
-</div>
-</div>
 </body>
 </html>
