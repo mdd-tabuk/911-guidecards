@@ -1,3 +1,5 @@
+let drillActive = false;
+let drillIncident = "";
 function searchIncident() {
    let input = document.getElementById("searchBox").value.toLowerCase();
    let pages = {
@@ -33,14 +35,25 @@ function sendMessage() {
        let botMessage = document.createElement("p");
        botMessage.classList.add("bot-message");
        let responses = {
-           "mva": "Ask: 1️⃣ What is the exact location? 2️⃣ How many vehicles are involved? 3️⃣ Are there any injuries?",
-           "theft": "Ask: 1️⃣ What was stolen? 2️⃣ When did it happen? 3️⃣ Do you see any suspects?",
-           "start drill": "🚨 Emergency Drill Started! Simulating a real dispatcher scenario...",
-           "fire": "🔥 What type of fire? Electrical, major, or minor?",
-           "medical": "🩺 What type of emergency? Fainting or Abdominal Pain?",
-           "security": "🔒 What type of security issue? MVA, Theft, or Complaint?"
+           "mva": "📍 Location? 🚗 How many vehicles? 🚑 Any injuries?",
+           "theft": "📍 Location? 🏠 What was stolen? ⏳ When did it happen? 👀 Any suspects?",
+           "complaint": "📍 Location? 🔍 What is the complaint? ⏳ How long has it been happening?",
+           "electrical fire": "📍 Location? 🔥 What is burning? 🚒 Is the fire spreading?",
+           "major fire": "📍 Location? 🏢 What building is on fire? 🚑 Any injuries?",
+           "minor fire": "📍 Location? 🔥 Is the fire contained? 🌫️ Any smoke inhalation?",
+           "fainting": "📍 Location? 👤 Is the person breathing? 🏥 Any medical history?",
+           "abdominal pain": "📍 Location? ⚕️ How severe is the pain? 🍽️ Any recent food allergies?"
        };
-       botMessage.textContent = responses[input] || "I don't have a response for that. Try another incident.";
+       if (input === "start drill") {
+           drillActive = true;
+           let incidentKeys = Object.keys(responses);
+           drillIncident = incidentKeys[Math.floor(Math.random() * incidentKeys)]; // Select random incident
+           botMessage.textContent = `🚨 DRILL MODE ACTIVATED 🚨 \nSimulating a ${drillIncident.replace("-", " ")}. Begin questioning!`;
+       } else if (drillActive) {
+           botMessage.textContent = responses[drillIncident] || "Continue questioning for the drill.";
+       } else {
+           botMessage.textContent = responses[input] || "I don't have a response for that. Try another incident.";
+       }
        messages.appendChild(botMessage);
        document.getElementById("typingIndicator").style.display = "none";
        document.getElementById("chatInput").value = "";
@@ -49,4 +62,6 @@ function sendMessage() {
 }
 function clearChat() {
    document.getElementById("chatbotMessages").innerHTML = "<p class='bot-message'>Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>";
+   drillActive = false;
+   drillIncident = "";
 }
