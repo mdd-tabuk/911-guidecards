@@ -29,20 +29,21 @@
         </div>
     </div>
 
-    <!-- Chatbot Box -->
-    <div class="chatbot-box" id="chatbot">
-        <div class="chatbot-header">
-            Amaala - Dispatcher Assistant
-            <button class="close-chat" onclick="closeChatbot()">✖</button>
-        </div>
-        <div class="chatbot-messages" id="chatbotMessages">
-            <p class="bot-message">Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>
-        </div>
-        <p id="typingIndicator" class="typing-indicator">Amaala is typing...</p>
-        <input type="text" id="chatInput" placeholder="Type an incident or 'start drill'">
-        <button onclick="sendMessage()">Send</button>
-        <button class="clear-chat" onclick="clearChat()">Clear Chat</button>
+   <!-- Chatbot Box -->
+<div class="chatbot-box" id="chatbot">
+    <div class="chatbot-header">
+        Amaala - Dispatcher Assistant
+        <button class="close-chat" onclick="closeChatbot()">✖</button>
     </div>
+    <div class="chatbot-messages" id="chatbotMessages">
+        <p class="bot-message">Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>
+    </div>
+    <p id="typingIndicator" class="typing-indicator">Amaala is typing...</p>
+    <input type="text" id="chatInput" placeholder="Type an incident or 'start drill'">
+    <button id="sendButton">Send</button> <!-- Ensure send button has ID -->
+    <button class="clear-chat" onclick="clearChat()">Clear Chat</button>
+</div>
+
 
     <script src="script.js"></script>
 
