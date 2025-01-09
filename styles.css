@@ -1,4 +1,94 @@
-/* Floating Chatbot Button */
+/* General Styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Header Styling */
+.header {
+    background-color: #222;
+    color: white;
+    padding: 20px;
+    font-size: 26px;
+    font-weight: bold;
+}
+
+/* Main Container */
+.container {
+    width: 80%;
+    max-width: 600px;
+    margin: 50px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Emergency Type Buttons */
+h2 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+    border-radius: 6px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.security {
+    background-color: #007bff;
+}
+
+.medical {
+    background-color: #28a745;
+}
+
+.fire {
+    background-color: #dc3545;
+}
+
+.btn:hover {
+    opacity: 0.8;
+}
+
+/* Search Box */
+.search-box {
+    margin-top: 20px;
+}
+
+.search-box input {
+    width: 70%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.search-box button {
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.search-box button:hover {
+    background-color: #0056b3;
+}
+
+/* Floating Bot Button */
 .chatbot-container {
     position: fixed;
     bottom: 20px;
@@ -7,7 +97,7 @@
     animation: floatAnimation 2s infinite alternate ease-in-out;
 }
 
-/* Circular Chatbot Button */
+/* Chatbot Button (Circle with Emoji) */
 .chatbot-button {
     width: 65px;
     height: 65px;
