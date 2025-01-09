@@ -1,90 +1,79 @@
-const OPENAI_API_KEY = "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"; // 🔴 Replace this with your actual API key
-let drillActive = false;
-function searchIncident() {
-   let input = document.getElementById("searchBox").value.toLowerCase();
-   let pages = {
-       "mva": "security.html",
-       "theft": "security.html",
-       "complaint": "security.html",
-       "electrical fire": "fire.html",
-       "major fire": "fire.html",
-       "minor fire": "fire.html",
-       "fainting": "medical.html",
-       "abdominal pain": "medical.html"
-   };
-   if (pages[input]) {
-       window.location.href = pages[input];
-   } else {
-       alert("Incident not found! Please try again.");
-   }
+/* General Styles */
+body {
+   font-family: Arial, sans-serif;
+   background-color: #f4f4f4;
+   margin: 0;
+   padding: 0;
+   text-align: center;
 }
-function toggleChat() {
-   let chat = document.getElementById("chatbot");
-   chat.style.display = (chat.style.display === "none" || chat.style.display === "") ? "block" : "none";
+.header {
+   background-color: #222;
+   color: white;
+   padding: 20px;
+   font-size: 24px;
 }
-async function sendMessage() {
-   let input = document.getElementById("chatInput").value.toLowerCase();
-   let messages = document.getElementById("chatbotMessages");
-   if (!input.trim()) return;
-   let userMessage = document.createElement("p");
-   userMessage.classList.add("user-message");
-   userMessage.textContent = input;
-   messages.appendChild(userMessage);
-   document.getElementById("typingIndicator").style.display = "block";
-   if (input === "start drill") {
-       drillActive = true;
-       await generateDrillScenario();
-   } else {
-       await getChatGPTResponse(input);
-   }
-   document.getElementById("typingIndicator").style.display = "none";
-   document.getElementById("chatInput").value = "";
-   messages.scrollTop = messages.scrollHeight;
+/* Floating Bot Icon */
+.chatbot-container {
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   cursor: pointer;
 }
-async function generateDrillScenario() {
-   let messages = document.getElementById("chatbotMessages");
-   let botMessage = document.createElement("p");
-   botMessage.classList.add("bot-message");
-   botMessage.textContent = "🚨 Generating a real-time emergency drill scenario... 🚨";
-   messages.appendChild(botMessage);
-   let prompt = `Generate a realistic 911 emergency drill for a dispatcher. The drill should include a fake emergency, a description of the caller, location details, and key questions the dispatcher should ask. Keep it as realistic as possible.`;
-   let scenario = await callChatGPT(prompt);
-   let responseMessage = document.createElement("p");
-   responseMessage.classList.add("bot-message");
-   responseMessage.textContent = scenario;
-   messages.appendChild(responseMessage);
+.chatbot-container img {
+   width: 60px;
+   height: 60px;
+   transition: transform 0.2s ease-in-out;
 }
-async function getChatGPTResponse(userInput) {
-   let messages = document.getElementById("chatbotMessages");
-   let prompt = `You are a 911 dispatcher assistant. The user has asked: "${userInput}". Provide a professional dispatcher response.`;
-   let aiResponse = await callChatGPT(prompt);
-   let botMessage = document.createElement("p");
-   botMessage.classList.add("bot-message");
-   botMessage.textContent = aiResponse;
-   messages.appendChild(botMessage);
+.chatbot-container img:hover {
+   transform: scale(1.1);
 }
-async function callChatGPT(prompt) {
-   try {
-       let response = await fetch("https://api.openai.com/v1/chat/completions", {
-           method: "POST",
-           headers: {
-               "Content-Type": "application/json",
-               "Authorization": `Bearer ${OPENAI_API_KEY}`
-           },
-           body: JSON.stringify({
-               model: "gpt-3.5-turbo",
-               messages: [{ role: "system", content: prompt }],
-               max_tokens: 150
-           })
-       });
-       let data = await response.json();
-       return data.choices[0].message.content.trim();
-   } catch (error) {
-       console.error("Error fetching ChatGPT response:", error);
-       return "⚠️ Error connecting to AI. Please try again.";
-   }
+/* Chatbot Box (Hidden by Default) */
+.chatbot-box {
+   display: none;
+   width: 350px;
+   height: 500px;
+   background: white;
+   border-radius: 12px;
+   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+   position: fixed;
+   bottom: 20px;
+   right: 20px;
+   padding: 15px;
+   text-align: left;
+   transform: scale(0.8);
+   opacity: 0;
+   transition: transform 0.3s ease, opacity 0.3s ease;
 }
-function clearChat() {
-   document.getElementById("chatbotMessages").innerHTML = "<p class='bot-message'>Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>";
-   drillActive = false;
+/* Chatbot Open Animation (macOS-like effect) */
+.chatbot-box.open {
+   display: block;
+   transform: scale(1);
+   opacity: 1;
+}
+/* Chatbot Header */
+.chatbot-header {
+   background-color: #007bff;
+   color: white;
+   padding: 10px;
+   font-size: 16px;
+   text-align: center;
+   border-radius: 12px 12px 0 0;
+}
+/* Chatbot Close Button */
+.close-chat {
+   position: absolute;
+   right: 10px;
+   top: 5px;
+   background: none;
+   border: none;
+   color: white;
+   font-size: 18px;
+   cursor: pointer;
+}
+/* Typing Indicator */
+.typing-indicator {
+   display: none;
+   font-style: italic;
+   color: gray;
+   padding: 5px;
 }
