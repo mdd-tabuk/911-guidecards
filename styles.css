@@ -38,6 +38,11 @@ body {
    position: fixed;
    bottom: 20px;
    right: 20px;
+   animation: chatbot-move 2s infinite alternate ease-in-out;
+}
+@keyframes chatbot-move {
+   0% { transform: translateY(0); }
+   100% { transform: translateY(-5px); }
 }
 .chatbot-toggle {
    background-color: #007bff;
@@ -66,6 +71,12 @@ body {
    padding: 10px;
    font-size: 16px;
 }
+.typing-indicator {
+   display: none;
+   font-style: italic;
+   color: gray;
+   padding: 5px;
+}
 .user-message {
    background-color: #e1e1e1;
    padding: 8px;
@@ -85,3 +96,4 @@ body {
    cursor: pointer;
    width: 100%;
 }
+
