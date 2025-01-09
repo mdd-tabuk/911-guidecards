@@ -16,88 +16,17 @@ body {
     font-weight: bold;
 }
 
-/* Main Container */
-.container {
-    width: 80%;
-    max-width: 600px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-
-/* Emergency Type Buttons */
-h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 18px;
-    text-decoration: none;
-    color: white;
-    border-radius: 6px;
-    margin: 10px;
-    font-weight: bold;
-}
-
-.security {
-    background-color: #007bff;
-}
-
-.medical {
-    background-color: #28a745;
-}
-
-.fire {
-    background-color: #dc3545;
-}
-
-.btn:hover {
-    opacity: 0.8;
-}
-
-/* Search Box */
-.search-box {
-    margin-top: 20px;
-}
-
-.search-box input {
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-box button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.search-box button:hover {
-    background-color: #0056b3;
-}
-
-/* Floating Bot Button */
+/* Chatbot Floating Button */
 .chatbot-container {
     position: fixed;
     bottom: 20px;
     right: 20px;
     cursor: pointer;
+    z-index: 1000; /* Ensures it's above other elements */
     animation: floatAnimation 2s infinite alternate ease-in-out;
 }
 
-/* Chatbot Button (Circle with Emoji) */
+/* Chatbot Button (Circular) */
 .chatbot-button {
     width: 65px;
     height: 65px;
@@ -122,27 +51,28 @@ h2 {
     100% { transform: translateY(-5px); }
 }
 
-/* Chatbot Box (Hidden by Default) */
+/* Chatbot Box */
 .chatbot-box {
-    display: none;  /* Ensure it starts hidden */
+    display: none;
     width: 350px;
     height: 500px;
     background: white;
     border-radius: 12px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
     position: fixed;
-    bottom: 20px;
+    bottom: 90px; /* Moves the chat box ABOVE the button */
     right: 20px;
     padding: 15px;
     text-align: left;
     transform: scale(0.8);
     opacity: 0;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    z-index: 999; /* Ensure chatbot window does not cover the button */
 }
 
 /* Chatbot Open Effect */
 .chatbot-box.open {
-    display: block; /* Show when opened */
+    display: block;
     transform: scale(1);
     opacity: 1;
 }
@@ -167,4 +97,39 @@ h2 {
     color: white;
     font-size: 18px;
     cursor: pointer;
+}
+
+/* Chatbot Messages */
+.chatbot-messages {
+    height: 350px;
+    overflow-y: auto;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* User & Bot Messages */
+.user-message, .bot-message {
+    padding: 8px 12px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+.user-message {
+    background: #007bff;
+    color: white;
+    text-align: right;
+}
+
+.bot-message {
+    background: #f1f1f1;
+    color: black;
+    text-align: left;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: none;
+    font-style: italic;
+    color: gray;
+    padding: 5px;
 }
