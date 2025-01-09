@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Fire Emergencies</title>
-<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Incidents</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="header">Fire Emergencies</div>
-<div class="container">
-<h2>Select a Fire Emergency</h2>
-<div class="guide-card">Electrical Fire</div>
-<div class="guide-card">Major Fire</div>
-<div class="guide-card">Minor Fire</div>
-</div>
-<a href="index.html" class="btn back">⬅ Back</a>
+
+    <header>
+        <h1>🔥 Fire Incidents</h1>
+    </header>
+
+    <div class="container">
+        <h2>Select a Fire Emergency</h2>
+        <div class="button-group">
+            <a href="#" class="btn fire">⚡ Electrical Fire</a>
+            <a href="#" class="btn fire">🏢 Major Fire</a>
+            <a href="#" class="btn fire">🔥 Minor Fire</a>
+        </div>
+
+        <button class="back-button" onclick="goBack()">⬅ Back</button>
+    </div>
+
+    <script src="script.js"></script>
+
 </body>
 </html>
