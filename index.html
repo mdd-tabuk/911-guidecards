@@ -3,107 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>911 Dispatcher Guidecards</title>
+<title>911 Dispatcher Guide</title>
 <style>
        body {
            font-family: Arial, sans-serif;
+           background-color: #f4f4f4;
            margin: 0;
            padding: 0;
-           background-color: #f4f4f4;
            text-align: center;
        }
-       header {
-           background: #333;
+       .header {
+           background-color: #222;
            color: white;
            padding: 15px;
-           text-align: center;
            font-size: 24px;
+           text-align: center;
        }
        .container {
-           padding: 20px;
-       }
-       .guidecard {
+           width: 80%;
+           max-width: 800px;
+           margin: 20px auto;
            background: white;
-           padding: 15px;
-           margin: 10px auto;
-           max-width: 500px;
+           padding: 20px;
            border-radius: 8px;
            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
            text-align: left;
        }
-       h2 {
-           color: #333;
+       .section {
+           padding: 10px;
+           margin: 10px 0;
+           border-radius: 5px;
+       }
+       .red-box {
+           background-color: #ffdddd;
+           border-left: 5px solid red;
+           padding: 10px;
+       }
+       .green-box {
+           background-color: #ddffdd;
+           border-left: 5px solid green;
+           padding: 10px;
+       }
+       .question {
+           font-weight: bold;
+           font-size: 18px;
+           margin-bottom: 5px;
        }
        ul {
-           text-align: left;
            list-style: none;
            padding: 0;
        }
        ul li {
-           background: #ddd;
-           padding: 8px;
+           background: #eee;
            margin: 5px 0;
-           border-radius: 5px;
-       }
-       footer {
-           background: #333;
-           color: white;
            padding: 10px;
-           position: relative;
-           bottom: 0;
-           width: 100%;
-           margin-top: 20px;
+           border-radius: 5px;
        }
 </style>
 </head>
 <body>
-<header>
-       911 Dispatcher Guidecards
-</header>
+<div class="header">
+       ALL CALLER INTERROGATION (ACI)
+</div>
 <div class="container">
-<div class="guidecard">
-<h2>General Emergency Questions</h2>
+<div class="section">
+<h2>Where is the Patient? (Address or Location)</h2>
+<h2>What is your call back number and your name?</h2>
+<h2>What is the problem?</h2>
+<h2>Is the patient conscious? (Able to talk)</h2>
+</div>
+<div class="red-box">
+<h3>No: Continue</h3>
 <ul>
-<li>What is the location of the emergency?</li>
-<li>What is your phone number?</li>
-<li>Can you describe what happened?</li>
-<li>Is anyone injured?</li>
-<li>Are there weapons involved?</li>
+<li>Describe the patient’s breathing.</li>
+<li>If breathing is not Agonal, go to <strong>Unconscious / Syncope</strong>.</li>
+<li>If breathing is Agonal, dispatch the ambulance.</li>
+<li>Ask: "Do you want to do CPR? I'll help you."</li>
+<li><strong>YES:</strong> Go to CPR (Adult / Child / Infant).</li>
+<li><strong>NO:</strong> "Help is on the way. Stay on the line."</li>
 </ul>
 </div>
-<div class="guidecard">
-<h2>Medical Emergency Questions</h2>
+<div class="green-box">
+<h3>YES: Determine age, sex, and chief complaint.</h3>
 <ul>
-<li>Is the patient conscious and breathing?</li>
-<li>What are the symptoms?</li>
-<li>How old is the patient?</li>
-<li>Is there any severe bleeding?</li>
-<li>Do you know if the patient has any medical history?</li>
-</ul>
-</div>
-<div class="guidecard">
-<h2>Fire Emergency Questions</h2>
-<ul>
-<li>What is on fire?</li>
-<li>Is anyone trapped?</li>
-<li>Is there smoke or flames visible?</li>
-<li>Are hazardous materials involved?</li>
-<li>Have you evacuated the area?</li>
-</ul>
-</div>
-<div class="guidecard">
-<h2>Police Emergency Questions</h2>
-<ul>
-<li>What is the suspect's description?</li>
-<li>Are they armed?</li>
-<li>What direction did they go?</li>
-<li>Are there any injuries?</li>
-<li>Is the suspect still on scene?</li>
+<li>Proceed to the appropriate guidecard.</li>
+<li>Check patient’s condition.</li>
+<li>Stay on the line for further details.</li>
 </ul>
 </div>
 </div>
-<footer>
-&copy; 2025 911 Dispatcher Guidecards | For Training & Awareness Purposes
-</footer>
 </body>
 </html>
