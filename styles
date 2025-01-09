@@ -1,0 +1,55 @@
+body {
+   font-family: Arial, sans-serif;
+   background-color: #f4f4f4;
+   margin: 0;
+   padding: 0;
+   text-align: center;
+}
+.header {
+   background-color: #222;
+   color: white;
+   padding: 20px;
+   font-size: 24px;
+}
+.container {
+   width: 80%;
+   max-width: 600px;
+   margin: 20px auto;
+   background: white;
+   padding: 20px;
+   border-radius: 8px;
+   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h2 {
+   color: #333;
+}
+.btn {
+   display: block;
+   padding: 15px;
+   margin: 10px;
+   font-size: 18px;
+   text-decoration: none;
+   border-radius: 5px;
+   color: white;
+   text-align: center;
+}
+.security { background-color: #007bff; }
+.medical { background-color: #28a745; }
+.fire { background-color: #dc3545; }
+.back { background-color: #333; }
+.btn:hover {
+   opacity: 0.8;
+}
+.guide-card {
+   background: #f8f9fa;
+   padding: 15px;
+   margin: 10px;
+   border-left: 5px solid #007bff;
+   font-size: 18px;
+   border-radius: 5px;
+   text-align: left;
+}
+.guide-card:hover {
+   background: #e9ecef;
+   cursor: pointer;
+}
