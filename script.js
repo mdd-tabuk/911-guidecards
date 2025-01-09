@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     let chatButton = document.querySelector(".chatbot-container");
     let closeButton = document.querySelector(".close-chat");
-    let sendButton = document.getElementById("sendButton"); // Fix send button issue
+    let sendButton = document.getElementById("sendButton");
 
     if (chatButton) {
         chatButton.addEventListener("click", openChatbot);
@@ -22,11 +22,15 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
-// Open Chatbot
+// Open Chatbot (Fix position & keep button visible)
 function openChatbot() {
     let chat = document.getElementById("chatbot");
     chat.classList.add("open");
     chat.style.display = "block";
+
+    // Ensure chatbot button stays visible
+    let chatButton = document.querySelector(".chatbot-container");
+    chatButton.style.display = "block";
 }
 
 // Close Chatbot
@@ -38,7 +42,7 @@ function closeChatbot() {
     }, 300);
 }
 
-// Send Message
+// Send Message Function
 function sendMessage() {
     let inputField = document.getElementById("chatInput");
     let input = inputField.value.trim();
@@ -58,7 +62,7 @@ function sendMessage() {
     // Simulated Bot Response
     let botMessage = document.createElement("p");
     botMessage.classList.add("bot-message");
-    botMessage.textContent = "Processing your request...";
+    botMessage.textContent = "Amaala is thinking...";
     messages.appendChild(botMessage);
 
     messages.scrollTop = messages.scrollHeight;
