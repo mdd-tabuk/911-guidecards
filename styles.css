@@ -1,146 +1,37 @@
-/* General Styling */
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    text-align: center;
+// Open chatbot with smooth animation
+function openChatbot() {
+    let chat = document.getElementById("chatbot");
+    chat.classList.add("open");
 }
 
-/* Header Styling */
-.header {
-    background-color: #222;
-    color: white;
-    padding: 20px;
-    font-size: 26px;
-    font-weight: bold;
+// Close chatbot smoothly
+function closeChatbot() {
+    let chat = document.getElementById("chatbot");
+    chat.classList.remove("open");
 }
 
-/* Main Container */
-.container {
-    width: 80%;
-    max-width: 600px;
-    margin: 50px auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+// Search Incident Function
+function searchIncident() {
+    let input = document.getElementById("searchBox").value.toLowerCase();
+    let pages = {
+        "mva": "security.html",
+        "theft": "security.html",
+        "complaint": "security.html",
+        "electrical fire": "fire.html",
+        "major fire": "fire.html",
+        "minor fire": "fire.html",
+        "fainting": "medical.html",
+        "abdominal pain": "medical.html"
+    };
+
+    if (pages[input]) {
+        window.location.href = pages[input];
+    } else {
+        alert("Incident not found! Please try again.");
+    }
 }
 
-/* Emergency Type Buttons */
-h2 {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 20px;
+// Clear Chat
+function clearChat() {
+    document.getElementById("chatbotMessages").innerHTML = "<p class='bot-message'>Hello! I'm Amaala. Ask me what to say in an emergency or start a drill!</p>";
 }
-
-.btn {
-    display: inline-block;
-    padding: 12px 20px;
-    font-size: 18px;
-    text-decoration: none;
-    color: white;
-    border-radius: 6px;
-    margin: 10px;
-    font-weight: bold;
-}
-
-.security {
-    background-color: #007bff;
-}
-
-.medical {
-    background-color: #28a745;
-}
-
-.fire {
-    background-color: #dc3545;
-}
-
-.btn:hover {
-    opacity: 0.8;
-}
-
-/* Search Box */
-.search-box {
-    margin-top: 20px;
-}
-
-.search-box input {
-    width: 70%;
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.search-box button {
-    padding: 10px 15px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.search-box button:hover {
-    background-color: #0056b3;
-}
-
-/* Floating Bot Button */
-.chatbot-container {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    cursor: pointer;
-    animation: floatAnimation 2s infinite alternate ease-in-out;
-}
-
-/* Chatbot Button (Circle with Emoji) */
-.chatbot-button {
-    width: 65px;
-    height: 65px;
-    background-color: #007bff;
-    color: white;
-    font-size: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-}
-
-.chatbot-button:hover {
-    transform: scale(1.1);
-}
-
-/* Floating Animation */
-@keyframes floatAnimation {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
-}
-
-/* Chatbot Box */
-.chatbot-box {
-    display: none;
-    width: 350px;
-    height: 500px;
-    background: white;
-    border-radius: 12px;
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px;
-    text-align: left;
-    transform: scale(0.8);
-    opacity: 0;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-/* Chatbot Open Animation */
-.chatbot-box.open {
-    display: block;
-    transform
