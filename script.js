@@ -1,11 +1,14 @@
+// Wait for the page to fully load
 document.addEventListener("DOMContentLoaded", function () {
     let chatButton = document.querySelector(".chatbot-container");
     let closeButton = document.querySelector(".close-chat");
 
+    // Ensure the chatbot button opens the chat
     if (chatButton) {
         chatButton.addEventListener("click", openChatbot);
     }
 
+    // Ensure the close button hides the chat
     if (closeButton) {
         closeButton.addEventListener("click", closeChatbot);
     }
@@ -15,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
 function openChatbot() {
     let chat = document.getElementById("chatbot");
     chat.classList.add("open");
-    chat.style.display = "block"; // Ensure it's visible
+    chat.style.display = "block"; // Ensure visibility
 }
 
 // Function to Close Chatbot
