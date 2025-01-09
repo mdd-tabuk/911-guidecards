@@ -1,4 +1,4 @@
-const OPENAI_API_KEY = "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"; // 🔴 Replace this with your actual API key
+const OPENAI_API_KEY = "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"; // 🔴 Replace this with your actual API key
 let drillActive = false;
 function searchIncident() {
    let input = document.getElementById("searchBox").value.toLowerCase();
